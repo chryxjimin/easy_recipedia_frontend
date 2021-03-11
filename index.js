@@ -1,13 +1,14 @@
+const cuisineSelect = document.querySelector("#cuisine-dropdown")
 const recipeContainer = document.querySelector("#recipe-container")
 
 document.addEventListener('DOMContentLoaded', () => {
-    getRecipe()
-    recipeContainer.addEventListener("click", function(e) {
+    getRecipes();
+    cuisineSelect.addEventListener("click", function(e) {
         createFormHandler(e); 
     })
 })
 
-function getRecipe() {
+function getRecipes() {
     fetch ("http://localhost:3000/api/v1/recipes")
         .then(resp => resp.json())
         .then(recipe => {
@@ -29,12 +30,13 @@ function getRecipe() {
 
 function createFormHandler(e) {
     e.preventDefault()
-    const cuisineInput = parseInt(document.querySelector("#cuisines").value)
+    // console.log(e)
+    const cuisineInput = parseInt(document.querySelector("#cuisine-dropdown").value)
     getPostFetch(cuisineInput)
 }
 
 function getPostFetch(cuisine_id) {
-
+    
     fetch("http://localhost:3000/api/v1/recipes", {
         method: "POST",
         headers: {
@@ -42,7 +44,7 @@ function getPostFetch(cuisine_id) {
             "Accept": "application/json"
         },
         body: JSON.stringify({
-            cuisine_id: cuisine_id
+           cuisine_id: cuisine_id
         })
     })
     .then(resp => resp.json())
