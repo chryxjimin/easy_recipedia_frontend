@@ -2,18 +2,12 @@ const recipeContainer = document.querySelector("#recipe-container")
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipe()
-    let recipeForm = document.querySelector("#create-recipe-form")
-    recipeForm.addEventListener("submit", function(e) {
-         
-        e.preventDefault();
-        e.stopPropagation();
-        console.log(e);
-        debugger;
-    }) 
+    recipeContainer.addEventListener("click", function(e) {
+        createFormHandler(e); 
+    })
 })
 
 function getRecipe() {
-    // debugger;
     fetch ("http://localhost:3000/api/v1/recipes")
         .then(resp => resp.json())
         .then(recipe => {
@@ -35,7 +29,6 @@ function getRecipe() {
 
 function createFormHandler(e) {
     e.preventDefault()
-    console.log(e)
 }
 
 
