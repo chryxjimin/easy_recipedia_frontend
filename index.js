@@ -2,7 +2,14 @@ const recipeContainer = document.querySelector("#recipe-container")
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipe()
-  
+    let recipeForm = document.querySelector("#create-recipe-form")
+    recipeForm.addEventListener("submit", function(e) {
+         
+        e.preventDefault();
+        e.stopPropagation();
+        console.log(e);
+        debugger;
+    }) 
 })
 
 function getRecipe() {
@@ -10,7 +17,6 @@ function getRecipe() {
     fetch ("http://localhost:3000/api/v1/recipes")
         .then(resp => resp.json())
         .then(recipe => {
-            // debugger;
             recipe.data.forEach(recipeData => {
                 let recipeHTML = `
                 <div data-id=${recipe.data[0].id}>
@@ -19,15 +25,18 @@ function getRecipe() {
                 <img src=${recipe.data[0].attributes.image_url}></img>
                 </div>   
                 `
-                recipeContainer.innerHTML = recipeHTML
+                recipeContainer.innerHTML += recipeHTML
             })
-        .catch(function(error) {
-            alert("Error. Failed to fetch");
-            console.log(error.message);
         })
-    })
+        .catch(error => {
+            alert("Error. Failed to fetch");
+        })
 }
 
+function createFormHandler(e) {
+    e.preventDefault()
+    console.log(e)
+}
 
 
 
