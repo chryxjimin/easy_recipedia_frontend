@@ -29,7 +29,14 @@ function getRecipe() {
 
 function createFormHandler(e) {
     e.preventDefault()
+    const cuisineInput = parseInt(document.querySelector("#cuisines").value)
+    getPostFetch(cuisineInput)
 }
+
+function getPostFetch(cuisine_id) {
+    console.log(cuisine_id)
+}
+
 
 
 
