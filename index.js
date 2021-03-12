@@ -3,9 +3,6 @@ const recipeContainer = document.querySelector("#recipe-container")
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
-    // cuisineSelect.addEventListener("click", function(e) {
-    //     createFormHandler(e); 
-    // })
     cuisineSelectDropdown();
     cuisineSelect.addEventListener("change", cuisineSelectDropdown());
 })
@@ -15,10 +12,10 @@ function getRecipes() {
         .then(recipe => {
             recipe.data.forEach(recipeData => {
                 let recipeHTML = `
-                <div data-id=${recipe.data[0].id}>
-                <h1 id="recipe-title">${recipe.data[0].attributes.title}</h1>
-                <h3 id="recipe-description">${recipe.data[0].attributes.description}</h3>
-                <img id="recipe-image" src=${recipe.data[0].attributes.image_url}></img>
+                <div data-id=${recipeData.id}>
+                <h1 id="recipe-title">${recipeData.attributes.title}</h1>
+                <h3 id="recipe-description">${recipeData.attributes.description}</h3>
+                <img id="recipe-image" src=${recipeData.attributes.image_url}></img>
                 </div>   
                 `
                 recipeContainer.innerHTML += recipeHTML
@@ -34,10 +31,23 @@ function getRecipes() {
 
 function cuisineSelectDropdown() {
     cuisineSelect.addEventListener("change", function(e) {
-        // createFormHandler(e); 
-        console.log(e)
-    })
-}
+        getFetch()
+        .then(recipe => {
+            console.log(recipe)
+            // debugger;
+            // let cuisineId = recipe.data[0].attributes.cuisine_id
+            // if (cuisineId === e.target.value) {
+            //     recipeContainer.innerHTML = " "
+            //     let filteredArray = [];
+            //     recipe.data[0].forEach(function(key) {
+            //         console.log(recipe[key]);
+            //     })
+            }
+            })
+        })
+    //  }
+
+
 
 function getFetch() {
     return fetch("http://localhost:3000/api/v1/recipes")
