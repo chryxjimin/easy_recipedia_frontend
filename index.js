@@ -3,14 +3,15 @@ const recipeContainer = document.querySelector("#recipe-container")
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
-    cuisineSelect.addEventListener("click", function(e) {
-        createFormHandler(e); 
-    })
+    // cuisineSelect.addEventListener("click", function(e) {
+    //     createFormHandler(e); 
+    // })
+    cuisineSelectDropdown();
+    cuisineSelect.addEventListener("change", cuisineSelectDropdown());
 })
 
 function getRecipes() {
-    fetch ("http://localhost:3000/api/v1/recipes")
-        .then(resp => resp.json())
+        getFetch()
         .then(recipe => {
             recipe.data.forEach(recipeData => {
                 let recipeHTML = `
@@ -28,30 +29,47 @@ function getRecipes() {
         })
 }
 
-function createFormHandler(e) {
-    e.preventDefault()
-    // console.log(e)
-    const cuisineInput = parseInt(document.querySelector("#cuisine-dropdown").value)
-    getPostFetch(cuisineInput)
+
+
+
+function cuisineSelectDropdown() {
+    cuisineSelect.addEventListener("change", function(e) {
+        // createFormHandler(e); 
+        console.log(e)
+    })
 }
 
-function getPostFetch(cuisine_id) {
-    
-    fetch("http://localhost:3000/api/v1/recipes", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json", 
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({
-           cuisine_id: cuisine_id
-        })
-    })
-    .then(resp => resp.json())
-    .then(recipe => {
-        console.log(recipe)
-    })
+function getFetch() {
+    return fetch("http://localhost:3000/api/v1/recipes")
+            .then(resp => resp.json())
 }
+
+// function createFormHandler(e) {
+//     e.preventDefault()
+//     console.log(e)
+//     // const cuisineInput = parseInt(document.querySelector("#cuisine-dropdown").value)
+//     // getPostFetch(cuisineInput)
+// }
+
+
+
+// function getPostFetch(cuisine_id) {
+    
+//     fetch("http://localhost:3000/api/v1/recipes", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json", 
+//             "Accept": "application/json"
+//         },
+//         body: JSON.stringify({
+//            cuisine_id: cuisine_id
+//         })
+//     })
+//     .then(resp => resp.json())
+//     .then(recipe => {
+//         console.log(recipe)
+//     })
+// }
 
 
 
