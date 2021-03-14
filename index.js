@@ -59,8 +59,11 @@ function getFetch() {
 
 function createFormHandler(e) {
     e.preventDefault()
-    console.log(e)
+    const titleInput = document.querySelector("#recipe-title").value
+    const descriptionInput = document.querySelector("#recipe-description").value
+    const imageUrlInput = document.querySelector("#recipe-image-url").value
     const cuisineInput = parseInt(document.querySelector("#cuisine-dropdown").value)
+    console.log(titleInput, descriptionInput, imageUrlInput, cuisineInput)
     // getPostFetch(cuisineInput)
 }
 
