@@ -42,9 +42,9 @@ function cuisineSelectDropdown() {
             //     recipe.data[0].forEach(function(key) {
             //         console.log(recipe[key]);
             //     })
-            }
             })
-        })
+            })
+        }
     //  }
 
 
