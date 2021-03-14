@@ -70,18 +70,22 @@ function createFormHandler(e) {
 
 function getPostFetch(title, description, image_url, cuisine_id) {
     console.log(title, description, image_url, cuisine_id)
-    // fetch("http://localhost:3000/api/v1/recipes", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json", 
-    //         "Accept": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //        cuisine_id: cuisine_id
-    //     })
-    // })
-    // .then(resp => resp.json())
-    // .then(recipe => {
-    //     console.log(recipe)
-    }
+    fetch("http://localhost:3000/api/v1/recipes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json", 
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            title: title,
+            description: description,
+            image_url: image_url,
+           cuisine_id: cuisine_id
+        })
+    })
+    .then(resp => resp.json())
+    .then(recipe => {
+        console.log(recipe)
+    })
+}
  
