@@ -15,7 +15,7 @@ function getRecipes() {
         getFetch()
         .then(recipe => {
             recipe.data.forEach(recipeData => {
-                let newRecipe = new Recipe(recipeData, recipeData.attributes)
+                const newRecipe = new Recipe(recipeData, recipeData.attributes)
                 recipeCollection.push(newRecipe)
                 recipeContainer.innerHTML += newRecipe.renderRecipes();
             
@@ -24,7 +24,6 @@ function getRecipes() {
         .catch(error => {
             alert("Error. Failed to fetch");
         })
-        console.log(recipeCollection)
 }
 
 
@@ -78,8 +77,11 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     })
     .then(resp => resp.json())
     .then(recipe => {
-        const recipeData = recipe.data
-        renderRecipes(recipeData)
+        recipe.data.forEach(recipeData => {
+            let newRecipe = new Recipe(recipeData, recipeData.attributes)
+            recipeCollection.push(newRecipe)
+            recipeContainer.innerHTML += newRecipe.renderRecipes();
+        })
     })
     .catch(error => {
             alert("Error");
