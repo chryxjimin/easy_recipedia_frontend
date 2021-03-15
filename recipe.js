@@ -1,5 +1,3 @@
-// const newArray = []
-
 class Recipe {
     constructor(recipeData, recipeAttributes) {
         this.title = recipeAttributes.title;

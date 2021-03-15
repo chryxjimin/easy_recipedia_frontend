@@ -1,3 +1,4 @@
+const apiUrl = "http://localhost:3000/api/v1/recipes";
 const cuisineSelect = document.querySelector("#cuisine-dropdown")
 const recipeContainer = document.querySelector("#recipe-container")
 const recipeCollection = []
@@ -36,6 +37,7 @@ function getRecipes() {
 
 
 
+
 // function cuisineSelectDropdown() {
     // cuisineSelect.addEventListener("change", function(e) {
     //     getFetch()
@@ -57,7 +59,7 @@ function getRecipes() {
 
 
 function getFetch() {
-    return fetch("http://localhost:3000/api/v1/recipes")
+    return fetch(apiUrl)
             .then(resp => resp.json())
 }
 
