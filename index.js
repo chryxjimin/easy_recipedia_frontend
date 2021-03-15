@@ -90,10 +90,9 @@ function getPostFetch(title, description, image_url, cuisine_id) {
                 `
                 recipeContainer.innerHTML += recipeHTML
     })
-    
+    .catch(error => {
+            alert("Error");
+    })
 }
  
 
-// .catch(error => {
-//     alert("Error");
-// })
