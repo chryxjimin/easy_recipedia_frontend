@@ -80,7 +80,20 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     })
     .then(resp => resp.json())
     .then(recipe => {
-        console.log(recipe)
+        const recipeData = recipe.data
+        let recipeHTML = `
+                <div data-id=${recipeData.id}>
+                <h1 id="recipe-title">${recipeData.attributes.title}</h1>
+                <h3 id="recipe-description">${recipeData.attributes.description}</h3>
+                <img id="recipe-image" src=${recipeData.attributes.image_url}></img>
+                </div>   
+                `
+                recipeContainer.innerHTML += recipeHTML
     })
+    
 }
  
+
+// .catch(error => {
+//     alert("Error");
+// })
