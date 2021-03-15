@@ -13,6 +13,9 @@ function getRecipes() {
         getFetch()
         .then(recipe => {
             recipe.data.forEach(recipeData => {
+                debugger;
+                let newRecipe = new Recipe(recipeData)
+
                 let recipeHTML = `
                 <div data-id=${recipeData.id}>
                 <h1 id="recipe-title">${recipeData.attributes.title}</h1>
