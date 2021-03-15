@@ -1,5 +1,6 @@
 const cuisineSelect = document.querySelector("#cuisine-dropdown")
 const recipeContainer = document.querySelector("#recipe-container")
+const recipeCollection = []
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
@@ -13,6 +14,9 @@ function getRecipes() {
         getFetch()
         .then(recipe => {
             recipe.data.forEach(recipeData => {
+                let newRecipe = new Recipe(recipeData, recipeData.attributes)
+                recipeCollection.push(newRecipe)
+
                 let recipeHTML = `
                 <div data-id=${recipeData.id}>
                 <h1 id="recipe-title">${recipeData.attributes.title}</h1>
@@ -26,6 +30,7 @@ function getRecipes() {
         .catch(error => {
             alert("Error. Failed to fetch");
         })
+        console.log(recipeCollection)
 }
 
 
