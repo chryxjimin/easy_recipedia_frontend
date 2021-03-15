@@ -1,10 +1,12 @@
-console.log("in recipe.js")
+const newArray = []
 
 class Recipe {
-    constructor(title, description, image_url, category) {
-        this.title = title;
-        this.description = description;
-        this.image_url = image_url;
-        this.cuisine = category
+    constructor(recipeData, recipeAttributes) {
+        this.title = recipeAttributes.title;
+        this.description = recipeAttributes.description;
+        this.image_url = recipeAttributes.image_url;
+        this.cuisine = recipeAttributes.cuisine;
     }
 }
+
+
