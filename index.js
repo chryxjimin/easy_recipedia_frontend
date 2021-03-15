@@ -17,7 +17,7 @@ function getRecipes() {
             recipe.data.forEach(recipeData => {
                 let newRecipe = new Recipe(recipeData, recipeData.attributes)
                 recipeCollection.push(newRecipe)
-                renderRecipes(recipeData)
+                recipeContainer.innerHTML += newRecipe.renderRecipes();
             
             })
         })
@@ -26,18 +26,6 @@ function getRecipes() {
         })
         console.log(recipeCollection)
 }
-
-    function renderRecipes(recipeData) {
-    let recipeHTML = `
-    <div data-id=${recipeData.id}>
-    <h1 id="recipe-title">${recipeData.attributes.title}</h1>
-    <h3 id="recipe-description">${recipeData.attributes.description}</h3>
-    <img id="recipe-image" src=${recipeData.attributes.image_url}></img>
-    </div>   
-    `
-    recipeContainer.innerHTML += recipeHTML
-}
-
 
 
 
@@ -91,14 +79,7 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     .then(resp => resp.json())
     .then(recipe => {
         const recipeData = recipe.data
-        let recipeHTML = `
-                <div data-id=${recipeData.id}>
-                <h1 id="recipe-title">${recipeData.attributes.title}</h1>
-                <h3 id="recipe-description">${recipeData.attributes.description}</h3>
-                <img id="recipe-image" src=${recipeData.attributes.image_url}></img>
-                </div>   
-                `
-                recipeContainer.innerHTML += recipeHTML
+        renderRecipes(recipeData)
     })
     .catch(error => {
             alert("Error");
