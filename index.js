@@ -1,6 +1,7 @@
 const apiUrl = "http://localhost:3000/api/v1/recipes";
 const cuisineSelect = document.querySelector("#cuisine-dropdown")
 const recipeContainer = document.querySelector("#recipe-container")
+const bookmarkContainer = document.querySelector("#bookmark-container")
 const recipeCollection = []
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,6 +21,9 @@ function getRecipes() {
                 recipeContainer.innerHTML += newRecipe.renderRecipes();
             
             })
+            document.querySelectorAll(".bookmark-button")
+            .forEach((button) => button.addEventListener("click", displayBookmarkedRecipes));
+
             document.querySelectorAll(".delete-button")
             .forEach((button) => button.addEventListener("click", deleteRecipe));
         })
@@ -41,9 +45,16 @@ function deleteRecipe(e) {
 }
 
 
-// function displayFavorites() {
-//     const {id} = e.target.dataset
-// }
+function displayBookmarkedRecipes(e) {
+    const {id} = e.target.dataset
+    fetch(`http://localhost:3000/api/v1/recipes/${id}`)
+    .then(res => res.json())
+    .then(recipe => {
+        // debugger;
+        const newRecipe = new Recipe(recipe)
+        bookmarkContainer.innerHTML += newRecipe.renderRecipes()
+        })
+}
     
 
 
