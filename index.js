@@ -30,8 +30,10 @@ function getRecipes() {
 }
 
 function deleteRecipe(e) {
-    console.log("deleting recipe");
-    console.log(e.target);
+    const {id} = e.target.dataset;
+    fetch(`http://localhost:3000/api/v1/recipes/${id}`), {
+        method: "DELETE",
+    }
 }
 
 
