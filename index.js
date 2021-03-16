@@ -31,10 +31,21 @@ function getRecipes() {
 
 function deleteRecipe(e) {
     const {id} = e.target.dataset;
-    fetch(`http://localhost:3000/api/v1/recipes/${id}`), {
-        method: "DELETE",
-    }
+    fetch(`http://localhost:3000/api/v1/recipes/${id}`, {
+        method: "DELETE",   
+    })
+    .then(res => res.json())
+    .then( data => {
+        e.target.parentElement.remove()
+    })
 }
+
+
+// function displayFavorites() {
+//     const {id} = e.target.dataset
+// }
+    
+
 
 
 // function cuisineSelectDropdown() {
@@ -96,5 +107,3 @@ function getPostFetch(title, description, image_url, cuisine_id) {
             alert("Error");
     })
 }
- 
-
