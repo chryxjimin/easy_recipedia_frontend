@@ -1,5 +1,5 @@
 const apiUrl = "http://localhost:3000/api/v1/recipes";
-const cuisineSelect = document.querySelector("#cuisine-dropdown")
+const cuisineSelect = document.querySelector("#filter-dropdown")
 const recipeContainer = document.querySelector("#recipe-container")
 const bookmarkContainer = document.querySelector("#bookmark-container")
 const recipeCollection = []
@@ -63,19 +63,26 @@ function cuisineSelectDropdown() {
     cuisineSelect.addEventListener("change", function(e) {
         getFetch()
         .then(recipe => {
-            console.log(recipe)
-            debugger;
+            
+            let filteredArray = []
+            let recipeArray = recipe.data
             let cuisineId = recipe.data[0].attributes.cuisine_id
-            if (cuisineId === e.target.value) {
-                recipeContainer.innerHTML = " "
-                let filteredArray = [];
-                recipe.data[0].forEach(function(key) {
-                    console.log(recipe[key]);
-                })
+           
+            filteredArray = recipeArray.filter(recipe => {
+                return recipe.attributes.cuisine_id === +e.target.value
             })
+        
+            recipeContainer.innerHTML = " "
+            filteredArray.forEach(recipeData => {
+            const newRecipe = new Recipe(recipeData, recipeData.attributes)
+            recipeContainer.innerHTML += newRecipe.renderRecipes();
+            }) 
         })
-    }
- }
+    })
+}
+
+
+
 
 
 
