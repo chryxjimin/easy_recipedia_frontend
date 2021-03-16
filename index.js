@@ -20,10 +20,13 @@ function getRecipes() {
                 recipeContainer.innerHTML += newRecipe.renderRecipes();
             
             })
+            document.querySelectorAll(".delete-button")
+            .forEach((button) => button.addEventListener("click", deleteRecipe));
         })
         .catch(error => {
             alert("Error. Failed to fetch");
         })
+        
 }
 
 
