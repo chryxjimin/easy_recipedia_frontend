@@ -19,6 +19,10 @@ class Recipe {
         </div>   
         `
     }
+
+    renderBookmarkedRecipes() {
+        return `
+        <a href="http://localhost:3000/api/v1/recipes/${this.id}">${this.title}</a></br>
+        `
+    }
 }
-
-

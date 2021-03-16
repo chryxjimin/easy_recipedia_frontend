@@ -50,9 +50,9 @@ function displayBookmarkedRecipes(e) {
     fetch(`http://localhost:3000/api/v1/recipes/${id}`)
     .then(res => res.json())
     .then(recipe => {
+        const newRecipe = new Recipe(recipe, recipe.data.attributes)
+        bookmarkContainer.innerHTML += newRecipe.renderBookmarkedRecipes();
         // debugger;
-        const newRecipe = new Recipe(recipe)
-        bookmarkContainer.innerHTML += newRecipe.renderRecipes()
         })
 }
     
@@ -109,7 +109,7 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     .then(resp => resp.json())
     .then(recipe => {
         recipe.data.forEach(recipeData => {
-            let newRecipe = new Recipe(recipeData, recipeData.attributes)
+            const newRecipe = new Recipe(recipeData, recipeData.attributes)
             recipeCollection.push(newRecipe)
             recipeContainer.innerHTML += newRecipe.renderRecipes();
         })
