@@ -15,17 +15,36 @@ function getRecipes() {
         getFetch()
         .then(recipe => {
             recipe.data.forEach(recipeData => {
-                let newRecipe = new Recipe(recipeData, recipeData.attributes)
+                const newRecipe = new Recipe(recipeData, recipeData.attributes)
                 recipeCollection.push(newRecipe)
                 recipeContainer.innerHTML += newRecipe.renderRecipes();
             
             })
+            document.querySelectorAll(".delete-button")
+            .forEach((button) => button.addEventListener("click", deleteRecipe));
         })
         .catch(error => {
             alert("Error. Failed to fetch");
         })
-        console.log(recipeCollection)
+        
 }
+
+function deleteRecipe(e) {
+    const {id} = e.target.dataset;
+    fetch(`http://localhost:3000/api/v1/recipes/${id}`, {
+        method: "DELETE",   
+    })
+    .then(res => res.json())
+    .then( data => {
+        e.target.parentElement.remove()
+    })
+}
+
+
+// function displayFavorites() {
+//     const {id} = e.target.dataset
+// }
+    
 
 
 
@@ -78,12 +97,13 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     })
     .then(resp => resp.json())
     .then(recipe => {
-        const recipeData = recipe.data
-        renderRecipes(recipeData)
+        recipe.data.forEach(recipeData => {
+            let newRecipe = new Recipe(recipeData, recipeData.attributes)
+            recipeCollection.push(newRecipe)
+            recipeContainer.innerHTML += newRecipe.renderRecipes();
+        })
     })
     .catch(error => {
             alert("Error");
     })
 }
- 
-
