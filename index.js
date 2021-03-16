@@ -29,6 +29,10 @@ function getRecipes() {
         
 }
 
+function deleteRecipe(e) {
+    console.log("deleting recipe");
+    console.log(e.target);
+}
 
 
 // function cuisineSelectDropdown() {
