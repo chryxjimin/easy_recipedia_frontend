@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
     const createRecipeForm = document.querySelector("#create-recipe-form")
     createRecipeForm.addEventListener("submit", (e) => createFormHandler(e))
-    // cuisineSelectDropdown();
-    // cuisineSelect.addEventListener("change", cuisineSelectDropdown());
+    cuisineSelectDropdown();
+    cuisineSelect.addEventListener("change", cuisineSelectDropdown());
 })
 
 function getRecipes() {
@@ -59,23 +59,23 @@ function displayBookmarkedRecipes(e) {
 
 
 
-// function cuisineSelectDropdown() {
-    // cuisineSelect.addEventListener("change", function(e) {
-    //     getFetch()
-    //     .then(recipe => {
-    //         console.log(recipe)
-    //         // debugger;
-    //         // let cuisineId = recipe.data[0].attributes.cuisine_id
-    //         // if (cuisineId === e.target.value) {
-    //         //     recipeContainer.innerHTML = " "
-    //         //     let filteredArray = [];
-    //         //     recipe.data[0].forEach(function(key) {
-    //         //         console.log(recipe[key]);
-    //         //     })
-    //         })
-    //         })
-    //     }
-    // //  }
+function cuisineSelectDropdown() {
+    cuisineSelect.addEventListener("change", function(e) {
+        getFetch()
+        .then(recipe => {
+            console.log(recipe)
+            debugger;
+            let cuisineId = recipe.data[0].attributes.cuisine_id
+            if (cuisineId === e.target.value) {
+                recipeContainer.innerHTML = " "
+                let filteredArray = [];
+                recipe.data[0].forEach(function(key) {
+                    console.log(recipe[key]);
+                })
+            })
+        })
+    }
+ }
 
 
 
