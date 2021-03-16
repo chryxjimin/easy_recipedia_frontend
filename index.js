@@ -1,14 +1,15 @@
 const apiUrl = "http://localhost:3000/api/v1/recipes";
-const cuisineSelect = document.querySelector("#cuisine-dropdown")
+const cuisineSelect = document.querySelector("#filter-dropdown")
 const recipeContainer = document.querySelector("#recipe-container")
+const bookmarkContainer = document.querySelector("#bookmark-container")
 const recipeCollection = []
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
     const createRecipeForm = document.querySelector("#create-recipe-form")
     createRecipeForm.addEventListener("submit", (e) => createFormHandler(e))
-    // cuisineSelectDropdown();
-    // cuisineSelect.addEventListener("change", cuisineSelectDropdown());
+    cuisineSelectDropdown();
+    cuisineSelect.addEventListener("change", cuisineSelectDropdown());
 })
 
 function getRecipes() {
@@ -20,6 +21,9 @@ function getRecipes() {
                 recipeContainer.innerHTML += newRecipe.renderRecipes();
             
             })
+            document.querySelectorAll(".bookmark-button")
+            .forEach((button) => button.addEventListener("click", displayBookmarkedRecipes));
+
             document.querySelectorAll(".delete-button")
             .forEach((button) => button.addEventListener("click", deleteRecipe));
         })
@@ -41,30 +45,44 @@ function deleteRecipe(e) {
 }
 
 
-// function displayFavorites() {
-//     const {id} = e.target.dataset
-// }
+function displayBookmarkedRecipes(e) {
+    const {id} = e.target.dataset
+    fetch(`http://localhost:3000/api/v1/recipes/${id}`)
+    .then(res => res.json())
+    .then(recipe => {
+        const newRecipe = new Recipe(recipe, recipe.data.attributes)
+        bookmarkContainer.innerHTML += newRecipe.renderBookmarkedRecipes();
+        // debugger;
+        })
+}
     
 
 
 
-// function cuisineSelectDropdown() {
-    // cuisineSelect.addEventListener("change", function(e) {
-    //     getFetch()
-    //     .then(recipe => {
-    //         console.log(recipe)
-    //         // debugger;
-    //         // let cuisineId = recipe.data[0].attributes.cuisine_id
-    //         // if (cuisineId === e.target.value) {
-    //         //     recipeContainer.innerHTML = " "
-    //         //     let filteredArray = [];
-    //         //     recipe.data[0].forEach(function(key) {
-    //         //         console.log(recipe[key]);
-    //         //     })
-    //         })
-    //         })
-    //     }
-    // //  }
+function cuisineSelectDropdown() {
+    cuisineSelect.addEventListener("change", function(e) {
+        getFetch()
+        .then(recipe => {
+            
+            let filteredArray = []
+            let recipeArray = recipe.data
+            let cuisineId = recipe.data[0].attributes.cuisine_id
+           
+            filteredArray = recipeArray.filter(recipe => {
+                return recipe.attributes.cuisine_id === +e.target.value
+            })
+        
+            recipeContainer.innerHTML = " "
+            filteredArray.forEach(recipeData => {
+            const newRecipe = new Recipe(recipeData, recipeData.attributes)
+            recipeContainer.innerHTML += newRecipe.renderRecipes();
+            }) 
+        })
+    })
+}
+
+
+
 
 
 
@@ -98,7 +116,7 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     .then(resp => resp.json())
     .then(recipe => {
         recipe.data.forEach(recipeData => {
-            let newRecipe = new Recipe(recipeData, recipeData.attributes)
+            const newRecipe = new Recipe(recipeData, recipeData.attributes)
             recipeCollection.push(newRecipe)
             recipeContainer.innerHTML += newRecipe.renderRecipes();
         })
