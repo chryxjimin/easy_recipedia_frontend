@@ -3,6 +3,7 @@ const cuisineSelect = document.querySelector("#filter-dropdown")
 const recipeContainer = document.querySelector("#recipe-container")
 const bookmarkContainer = document.querySelector("#bookmark-container")
 const recipeCollection = []
+const recipeLink = document.getElementsById("#recipe-link")
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
@@ -55,15 +56,13 @@ function displayBookmarkedRecipes(e) {
         // debugger;
         })
 }
-    
-
 
 
 function cuisineSelectDropdown() {
     cuisineSelect.addEventListener("change", function(e) {
         getFetch()
         .then(recipe => {
-            
+
             let filteredArray = []
             let recipeArray = recipe.data
             let cuisineId = recipe.data[0].attributes.cuisine_id
@@ -80,8 +79,6 @@ function cuisineSelectDropdown() {
         })
     })
 }
-
-
 
 
 
@@ -115,12 +112,10 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     })
     .then(resp => resp.json())
     .then(recipe => {
-        recipe.data.forEach(recipeData => {
-            const newRecipe = new Recipe(recipeData, recipeData.attributes)
+            const newRecipe = new Recipe(recipe.data, recipe.data.attributes)
             recipeCollection.push(newRecipe)
             recipeContainer.innerHTML += newRecipe.renderRecipes();
         })
-    })
     .catch(error => {
             alert("Error");
     })

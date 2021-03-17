@@ -1,6 +1,5 @@
 class Recipe {
     constructor(recipeData, recipeAttributes) {
-        // debugger;
         this.id = recipeData.id;
         this.title = recipeAttributes.title;
         this.description = recipeAttributes.description;
@@ -22,7 +21,7 @@ class Recipe {
 
     renderBookmarkedRecipes() {
         return `
-        <a href="http://localhost:3000/api/v1/recipes/${this.id}">${this.title}</a></br>
+        <a href="http://localhost:3000/api/v1/recipes/${this.id}" id="recipe-link">${this.title}</a></br>
         `
     }
 }
