@@ -51,14 +51,16 @@ function deleteRecipe(e) {
 
 
 function displayBookmarkedRecipes(e) {
-    // console.log(e.target.dataset)
+    
     const {id} = e.target.dataset
-    fetch(`http://localhost:3000/api/v1/recipes/${id}`)
+    console.log(e.target.dataset)
+    // debugger;
+    fetch(`http://localhost:3000/api/v1/recipes/${parseInt(id)}`)
     .then(res => res.json())
     .then(recipe => {
         const newRecipe = new Recipe(recipe, recipe.data.attributes)
         bookmarkContainer.innerHTML += newRecipe.renderBookmarkedRecipes();
-        // debugger;
+        
         })
 }
 
@@ -107,6 +109,7 @@ function createFormHandler(e) {
     const imageUrlInput = document.querySelector("#recipe-image-url").value
     const cuisineInput = parseInt(document.querySelector("#cuisine-dropdown").value)
     getPostFetch(titleInput, descriptionInput, imageUrlInput, cuisineInput)
+    e.target.reset();
 }
 
 
@@ -130,4 +133,5 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     .catch(error => {
             alert("Error");
     })
+   
 }
