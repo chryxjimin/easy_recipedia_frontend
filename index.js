@@ -3,7 +3,7 @@ const cuisineSelect = document.querySelector("#filter-dropdown")
 const recipeContainer = document.querySelector("#recipe-container")
 const bookmarkContainer = document.querySelector("#bookmark-container")
 const recipeCollection = []
-const recipeLink = document.getElementsById("#recipe-link")
+const recipeLink = document.getElementsByTagName("A")
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     createRecipeForm.addEventListener("submit", (e) => createFormHandler(e))
     cuisineSelectDropdown();
     cuisineSelect.addEventListener("change", cuisineSelectDropdown());
+    displayBookmarkedRecipes();
+    getRecipeBookmarkDetails();
+    recipeLink.addEventListener("click", getRecipeBookmark());
 })
 
 function getRecipes() {
@@ -35,8 +38,9 @@ function getRecipes() {
 }
 
 function deleteRecipe(e) {
-    const {id} = e.target.dataset;
-    fetch(`http://localhost:3000/api/v1/recipes/${id}`, {
+    // console.log(+e.target.dataset)
+    const {id} = e.target.dataset
+    fetch(`http://localhost:3000/api/v1/recipes/${parseInt(id)}`, {
         method: "DELETE",   
     })
     .then(res => res.json())
@@ -47,6 +51,7 @@ function deleteRecipe(e) {
 
 
 function displayBookmarkedRecipes(e) {
+    // console.log(e.target.dataset)
     const {id} = e.target.dataset
     fetch(`http://localhost:3000/api/v1/recipes/${id}`)
     .then(res => res.json())
@@ -55,6 +60,13 @@ function displayBookmarkedRecipes(e) {
         bookmarkContainer.innerHTML += newRecipe.renderBookmarkedRecipes();
         // debugger;
         })
+}
+
+
+function getRecipeBookmarkDetails() {
+    recipeLink.addEventListener("click", function(e) {
+        console.log(e)
+    })
 }
 
 
@@ -79,7 +91,6 @@ function cuisineSelectDropdown() {
         })
     })
 }
-
 
 
 
