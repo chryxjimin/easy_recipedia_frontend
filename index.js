@@ -21,14 +21,16 @@ function populateDropdown() {
     fetch("http://localhost:3000/api/v1/cuisines")
     .then(res => res.json())
     .then(cuisines => {
-        console.log(cuisines.data[0].id)
         // create class method to render the select dropdown form
         //use forEach method over value of array of cuisines
         //add cuisine.js?? and move renderCuisineDropdown() to the file
         //create a div class for the select form
+        //create an array for cuisine constructor
         
         cuisines.data.forEach(cuisine => {
-            console.log(cuisine.id)
+            console.log(cuisine.attributes)
+            debugger;
+            const newCuisine = new Cuisine(cuisine, cuisine.attributes)
         })
     })
 }
