@@ -21,12 +21,13 @@ section{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 100px 30px;
+    padding: 100px 0;
     background-color: 250, 249, 246;
 }
 
-#recipe-form-container{
-    margin: 20px;
+
+
+/* .container{
     width: 100%;
     background-color: transparent;
     background-color: 250, 249, 246;
@@ -35,6 +36,6 @@ section{
     border: none;
     outline: none;
     font-size: 2rem;
-}
+} */
 
 
