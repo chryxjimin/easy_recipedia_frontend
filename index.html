@@ -8,49 +8,49 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="recipe-form-container">
-        <form id="create-recipe-form">
-            <h3>Create a Recipe!</h3>
-            <input id="recipe-title" type="text" name="title" placeholder="Enter title"></br>
-            <textarea id="recipe-description" type="text" name="description" placeholder="Enter description"></textarea></br>
-            <input id="recipe-image-url" type="text" name="image-url" placeholder="Enter image-url"></br>
-            
-        
-            <label for="select-cuisine">Select a cuisine!</label>
-            <select id="cuisine-dropdown" name="select-cuisine">
-                <option value="1">Italian</option>
-                <option value="2">Mexican</option>
-                <option value="3">Thai</option>
-            </select></br>
-
-            <input id="submit" type="submit" name="submit" value="Submit"></br>            
-        </form>
-        </br>
-        </br>
-
-        <label for="filter-cuisine">Filter by cuisine!</label>
-        <select id="filter-dropdown" name="filter-cuisine">
-            <option value="1">Italian</option>
-            <option value="2">Mexican</option>
-            <option value="3">Thai</option>
-        </select></br>
-    </div>
-
-
-    
-
     <section>
-        <div id="recipe-container"></div>
+        <div class="container">
+            <h1 class="app">EASY RECEPEDIA</h1>
+                <div class="input">
+                    <form id="create-recipe-form">
+                        <h3>Create a Recipe!</h3>
+                        <input id="recipe-title" type="text" name="title" placeholder="Enter title"></br>
+                        <textarea id="recipe-description" type="text" name="description" placeholder="Enter description"></textarea></br>
+                        <input id="recipe-image-url" type="text" name="image-url" placeholder="Enter image-url"></br>
+                        
+                    
+                        <label for="select-cuisine">Select a cuisine!</label>
+                        <select id="cuisine-dropdown" name="select-cuisine">
+                            <option value="1">Italian</option>
+                            <option value="2">Mexican</option>
+                            <option value="3">Thai</option>
+                        </select></br>
+
+                        <input id="submit" type="submit" name="submit" value="Submit"></br>            
+                    </form>
+                    </br>
+                    </br>
+
+                    <!-- <label for="filter-cuisine">Filter by cuisine!</label>
+                    <select id="filter-dropdown" name="filter-cuisine">
+                        <option value="44">Italian</option>
+                        <option value="45">Mexican</option>
+                        <option value="46">Thai</option>
+                    </select></br> -->
+                </div>
+
+                
+                <div class="recipe-container"></div>
+                </div>
+
+                <h3>Bookmarked Recipes</h3>
+                <div class="bookmark-container" ></div>
+                    <ul id="bookmarked-list">
+
+                    </ul>
+                </div>
         </div>
     </section>
-
-    <h3>Bookmarked Recipes</h3>
-    <div id="bookmark-container" ></div>
-        <ul id="bookmarked-list">
-
-        </ul>
-    </div>
-
     <script type="text/javascript" src="recipe.js"></script>
     <script type="text/javascript" src="index.js"></script>
 </body>

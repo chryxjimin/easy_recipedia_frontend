@@ -1,16 +1,37 @@
 const apiUrl = "http://localhost:3000/api/v1/recipes";
 const cuisineSelect = document.querySelector("#filter-dropdown")
-const recipeContainer = document.querySelector("#recipe-container")
-const bookmarkContainer = document.querySelector("#bookmark-container")
+const recipeContainer = document.querySelector(".recipe-container")
+const bookmarkContainer = document.querySelector(".bookmark-container")
 const recipeCollection = []
+const recipeLink = document.getElementsByTagName("A")
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
     const createRecipeForm = document.querySelector("#create-recipe-form")
     createRecipeForm.addEventListener("submit", (e) => createFormHandler(e))
+    populateDropdown();
     cuisineSelectDropdown();
     cuisineSelect.addEventListener("change", cuisineSelectDropdown());
+    // displayBookmarkedRecipes();
+    // getRecipeBookmarkDetails();
+    // recipeLink.addEventListener("click", getRecipeBookmark());
 })
+
+function populateDropdown() {
+    fetch("http://localhost:3000/api/v1/cuisines")
+    .then(res => res.json())
+    .then(cuisines => {
+        console.log(cuisines.data[0].id)
+        // create class method to render the select dropdown form
+        //use forEach method over value of array of cuisines
+        //add cuisine.js?? and move renderCuisineDropdown() to the file
+        //create a div class for the select form
+        
+        cuisines.data.forEach(cuisine => {
+            console.log(cuisine.id)
+        })
+    })
+}
 
 function getRecipes() {
         getFetch()
@@ -34,8 +55,9 @@ function getRecipes() {
 }
 
 function deleteRecipe(e) {
-    const {id} = e.target.dataset;
-    fetch(`http://localhost:3000/api/v1/recipes/${id}`, {
+    // console.log(+e.target.dataset)
+    const {id} = e.target.dataset
+    fetch(`http://localhost:3000/api/v1/recipes/${parseInt(id)}`, {
         method: "DELETE",   
     })
     .then(res => res.json())
@@ -45,30 +67,40 @@ function deleteRecipe(e) {
 }
 
 
-function displayBookmarkedRecipes(e) {
-    const {id} = e.target.dataset
-    fetch(`http://localhost:3000/api/v1/recipes/${id}`)
-    .then(res => res.json())
-    .then(recipe => {
-        const newRecipe = new Recipe(recipe, recipe.data.attributes)
-        bookmarkContainer.innerHTML += newRecipe.renderBookmarkedRecipes();
-        // debugger;
-        })
-}
+// function displayBookmarkedRecipes(e) {
     
+//     const {id} = e.target.dataset
+//     console.log(e.target.dataset)
+//     // debugger;
+//     fetch(`http://localhost:3000/api/v1/recipes/${parseInt(id)}`)
+//     .then(res => res.json())
+//     .then(recipe => {
+//         const newRecipe = new Recipe(recipe, recipe.data.attributes)
+//         bookmarkContainer.innerHTML += newRecipe.renderBookmarkedRecipes();
+        
+//         })
+// }
 
+
+// function getRecipeBookmarkDetails() {
+//     recipeLink.addEventListener("click", function(e) {
+//         console.log(e)
+//     })
+// }
 
 
 function cuisineSelectDropdown() {
     cuisineSelect.addEventListener("change", function(e) {
         getFetch()
         .then(recipe => {
-            
+
             let filteredArray = []
             let recipeArray = recipe.data
-            let cuisineId = recipe.data[0].attributes.cuisine_id
+            // let cuisineId = recipe.data[0].attributes.cuisine_id
            
             filteredArray = recipeArray.filter(recipe => {
+                console.log(recipe)
+                console.log(e.target.value)
                 return recipe.attributes.cuisine_id === +e.target.value
             })
         
@@ -80,9 +112,6 @@ function cuisineSelectDropdown() {
         })
     })
 }
-
-
-
 
 
 
@@ -99,6 +128,7 @@ function createFormHandler(e) {
     const imageUrlInput = document.querySelector("#recipe-image-url").value
     const cuisineInput = parseInt(document.querySelector("#cuisine-dropdown").value)
     getPostFetch(titleInput, descriptionInput, imageUrlInput, cuisineInput)
+    e.target.reset();
 }
 
 
@@ -115,13 +145,12 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     })
     .then(resp => resp.json())
     .then(recipe => {
-        recipe.data.forEach(recipeData => {
-            const newRecipe = new Recipe(recipeData, recipeData.attributes)
+            const newRecipe = new Recipe(recipe.data, recipe.data.attributes)
             recipeCollection.push(newRecipe)
             recipeContainer.innerHTML += newRecipe.renderRecipes();
         })
-    })
     .catch(error => {
             alert("Error");
     })
+   
 }
