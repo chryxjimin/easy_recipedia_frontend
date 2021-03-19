@@ -3,8 +3,7 @@ const cuisineSelect = document.querySelector("#filter-dropdown")
 const bookmarkContainer = document.querySelector(".bookmark-container")
 const recipeContainer = document.querySelector(".recipe-container")
 const recipeCollection = []
-const cuisineContainer = document.querySelector(".cuisine-container")
-const cuisineCollection = []
+const cuisineContainer = document.querySelector(".filter-container")
 const recipeLink = document.getElementsByTagName("A")
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,17 +20,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function populateDropdown() {
+    //create an array 
+    let cuisineCollection = []
     fetch("http://localhost:3000/api/v1/cuisines")
     .then(res => res.json())
     .then(cuisines => {
-        //renderCuisineDropdown() to the file
+        
         cuisines.data.forEach(cuisine => {
-            const newCuisine = new Cuisine(cuisine, cuisine.attributes);
+            let newCuisine = new Cuisine(cuisine, cuisine.attributes);
             cuisineCollection.push(newCuisine)
-            console.log(newCuisine)
-            cuisineContainer.innerHTML += newCuisine.renderCuisineDropdown();
+            cuisineCollection.forEach(cuisine => {   
+                console.log(cuisine);
+            })
         })
-    })
+    })   
 }
 
 function renderCuisineDropdown() {
@@ -113,8 +115,6 @@ function cuisineSelectDropdown() {
             // let cuisineId = recipe.data[0].attributes.cuisine_id
            
             filteredArray = recipeArray.filter(recipe => {
-                console.log(recipe)
-                console.log(e.target.value)
                 return recipe.attributes.cuisine_id === +e.target.value
             })
         
