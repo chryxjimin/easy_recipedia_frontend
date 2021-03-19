@@ -22,7 +22,7 @@ function populateDropdown() {
     .then(res => res.json())
     .then(cuisines => {
         console.log(cuisines)
-        // make the route dynamic 
+        // create class method to render the select dropdown form
     })
 }
 
