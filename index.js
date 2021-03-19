@@ -27,7 +27,7 @@ function populateDropdown() {
         
         cuisines.data.forEach(cuisine => {
             console.log(cuisine.attributes)
-            // debugger;
+            debugger;
             const newCuisine = new Cuisine(cuisine, cuisine.attributes)
         })
     })
