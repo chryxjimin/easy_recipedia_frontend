@@ -21,15 +21,13 @@ function populateDropdown() {
     fetch("http://localhost:3000/api/v1/cuisines")
     .then(res => res.json())
     .then(cuisines => {
-        // create class method to render the select dropdown form
-        //use forEach method over value of array of cuisines
-        //add cuisine.js?? and move renderCuisineDropdown() to the file
+        //renderCuisineDropdown() to the file and call that class method inside cuisines.data.forEach
         //create a div class for the select form
         //create an array for cuisine constructor
         
         cuisines.data.forEach(cuisine => {
             console.log(cuisine.attributes)
-            debugger;
+            // debugger;
             const newCuisine = new Cuisine(cuisine, cuisine.attributes)
         })
     })
@@ -44,14 +42,14 @@ function getRecipes() {
                 recipeContainer.innerHTML += newRecipe.renderRecipes();
             
             })
-            document.querySelectorAll(".bookmark-button")
-            .forEach((button) => button.addEventListener("click", displayBookmarkedRecipes));
+            // document.querySelectorAll(".bookmark-button")
+            // .forEach((button) => button.addEventListener("click", displayBookmarkedRecipes));
 
             document.querySelectorAll(".delete-button")
             .forEach((button) => button.addEventListener("click", deleteRecipe));
         })
         .catch(error => {
-            alert("Error. Failed to fetch");
+            alert("Error. Failed to fetch recipes");
         })
         
 }

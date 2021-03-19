@@ -1,8 +1,8 @@
 class Cuisine {
-    constructor(cuisine) {
+    constructor(cuisine, cuisineAttributes) {
         // debugger;
         this.id = cuisine.id;
-        this.name = cuisine.name;
+        this.name = cuisineAttributes.name;
         
     }
 }
