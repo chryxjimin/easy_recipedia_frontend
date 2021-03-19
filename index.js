@@ -9,12 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
     const createRecipeForm = document.querySelector("#create-recipe-form")
     createRecipeForm.addEventListener("submit", (e) => createFormHandler(e))
+    populateDropdown();
     cuisineSelectDropdown();
     cuisineSelect.addEventListener("change", cuisineSelectDropdown());
-    displayBookmarkedRecipes();
-    getRecipeBookmarkDetails();
-    recipeLink.addEventListener("click", getRecipeBookmark());
+    // displayBookmarkedRecipes();
+    // getRecipeBookmarkDetails();
+    // recipeLink.addEventListener("click", getRecipeBookmark());
 })
+
+function populateDropdown() {
+    fetch("http://localhost:3000/api/v1/cuisines")
+    .then(res => res.json())
+    .then(cuisines => {
+        console.log(cuisines)
+        // make the route dynamic 
+    })
+}
 
 function getRecipes() {
         getFetch()
@@ -50,26 +60,26 @@ function deleteRecipe(e) {
 }
 
 
-function displayBookmarkedRecipes(e) {
+// function displayBookmarkedRecipes(e) {
     
-    const {id} = e.target.dataset
-    console.log(e.target.dataset)
-    // debugger;
-    fetch(`http://localhost:3000/api/v1/recipes/${parseInt(id)}`)
-    .then(res => res.json())
-    .then(recipe => {
-        const newRecipe = new Recipe(recipe, recipe.data.attributes)
-        bookmarkContainer.innerHTML += newRecipe.renderBookmarkedRecipes();
+//     const {id} = e.target.dataset
+//     console.log(e.target.dataset)
+//     // debugger;
+//     fetch(`http://localhost:3000/api/v1/recipes/${parseInt(id)}`)
+//     .then(res => res.json())
+//     .then(recipe => {
+//         const newRecipe = new Recipe(recipe, recipe.data.attributes)
+//         bookmarkContainer.innerHTML += newRecipe.renderBookmarkedRecipes();
         
-        })
-}
+//         })
+// }
 
 
-function getRecipeBookmarkDetails() {
-    recipeLink.addEventListener("click", function(e) {
-        console.log(e)
-    })
-}
+// function getRecipeBookmarkDetails() {
+//     recipeLink.addEventListener("click", function(e) {
+//         console.log(e)
+//     })
+// }
 
 
 function cuisineSelectDropdown() {
@@ -82,6 +92,8 @@ function cuisineSelectDropdown() {
             let cuisineId = recipe.data[0].attributes.cuisine_id
            
             filteredArray = recipeArray.filter(recipe => {
+                console.log(recipe)
+                console.log(e.target.value)
                 return recipe.attributes.cuisine_id === +e.target.value
             })
         

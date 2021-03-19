@@ -14,7 +14,7 @@ class Recipe {
         <h3 id="recipe-description">${this.description}</h3>
         <img id="recipe-image" src=${this.image_url} height="200" width="250"></img></br>
         <button data-id=${this.id} type="button" class="bookmark-button">Bookmark</button>
-        <button data-id=${this.id} type="button" class="delete-button">Delete</button>
+        <button data-id=${this.id} type="button" class="delete-button"><img src="https://img.icons8.com/wired/64/000000/delete-sign.png"/></button>
         </div>   
         `
     }
