@@ -19,20 +19,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // recipeLink.addEventListener("click", getRecipeBookmark());
 })
 
+
 function populateDropdown() {
     fetch("http://localhost:3000/api/v1/cuisines")
     .then(res => res.json())
     .then(cuisines => {
-        //renderCuisineDropdown() to the file and call that class method inside cuisines.data.forEach
-        //create a div class for the select form
-        //create an array for cuisine constructor
-        
+        //renderCuisineDropdown() to the file
         cuisines.data.forEach(cuisine => {
-            console.log(cuisine.attributes)
-            debugger;
-            const newCuisine = new Cuisine(cuisine, cuisine.attributes)
+            const newCuisine = new Cuisine(cuisine, cuisine.attributes);
+            cuisineCollection.push(newCuisine)
+            console.log(newCuisine)
+            cuisineContainer.innerHTML += newCuisine.renderCuisineDropdown();
         })
     })
+}
+
+function renderCuisineDropdown() {
+        return `
+        <div class="cuisine-container">
+            <label for="filter-cuisine">Filter by cuisine</label>
+                <select id="filter-dropdown" name="filter-cuisine">
+                <option value="44">Italian</option>
+                <option value="45">Mexican</option>
+                <option value="46">Thai</option>
+                </select></br>
+        </div>
+            `
 }
 
 function getRecipes() {
