@@ -1,8 +1,10 @@
 const apiUrl = "http://localhost:3000/api/v1/recipes";
 const cuisineSelect = document.querySelector("#filter-dropdown")
-const recipeContainer = document.querySelector(".recipe-container")
 const bookmarkContainer = document.querySelector(".bookmark-container")
+const recipeContainer = document.querySelector(".recipe-container")
 const recipeCollection = []
+const cuisineContainer = document.querySelector(".cuisine-container")
+const cuisineCollection = []
 const recipeLink = document.getElementsByTagName("A")
 
 document.addEventListener('DOMContentLoaded', () => {
