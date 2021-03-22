@@ -5,6 +5,7 @@ const recipeContainer = document.querySelector(".recipe-container")
 const recipeCollection = []
 const cuisineContainer = document.querySelector(".filter-container")
 const recipeLink = document.getElementsByTagName("A")
+const formError = []
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
@@ -28,26 +29,22 @@ function populateDropdown() {
         
         cuisines.data.forEach(cuisine => {
             let newCuisine = new Cuisine(cuisine, cuisine.attributes);
+            // debugger;
             cuisineCollection.push(newCuisine)
+            cuisineSelect.innerHTML = ""
             cuisineCollection.forEach(cuisine => {   
-                console.log(cuisine);
+                // console.log(cuisine.id);
+                let cuisineInput = 
+                `
+                    <option value="${cuisine.id}">${cuisine.name}</option>
+                `
+                cuisineSelect.innerHTML += cuisineInput
             })
+            
         })
     })   
 }
 
-function renderCuisineDropdown() {
-        return `
-        <div class="cuisine-container">
-            <label for="filter-cuisine">Filter by cuisine</label>
-                <select id="filter-dropdown" name="filter-cuisine">
-                <option value="44">Italian</option>
-                <option value="45">Mexican</option>
-                <option value="46">Thai</option>
-                </select></br>
-        </div>
-            `
-}
 
 function getRecipes() {
         getFetch()
@@ -142,6 +139,8 @@ function createFormHandler(e) {
     const imageUrlInput = document.querySelector("#recipe-image-url").value
     const cuisineInput = parseInt(document.querySelector("#cuisine-dropdown").value)
     getPostFetch(titleInput, descriptionInput, imageUrlInput, cuisineInput)
+    //cuisineInput = integer
+    // debugger;
     e.target.reset();
 }
 
@@ -149,6 +148,8 @@ function createFormHandler(e) {
 
 function getPostFetch(title, description, image_url, cuisine_id) {
     const recipeBody = {title, description, image_url, cuisine_id}
+    // debugger;
+    // cuisine_id=integer
     fetch("http://localhost:3000/api/v1/recipes", {
         method: "POST",
         headers: {
@@ -159,12 +160,23 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     })
     .then(resp => resp.json())
     .then(recipe => {
+        if (recipe.messages) {
+            renderErrors(recipe.messages)
+        }
+        else {
             const newRecipe = new Recipe(recipe.data, recipe.data.attributes)
             recipeCollection.push(newRecipe)
             recipeContainer.innerHTML += newRecipe.renderRecipes();
-        })
+        }
+    })
     .catch(error => {
             alert("Error");
     })
    
+}
+
+const renderErrors = function(errors) {
+    errors.forEach(error => {
+        formError.innerHTML += `<li>${error}</li>`
+    })
 }
