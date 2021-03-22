@@ -33,7 +33,7 @@ function populateDropdown() {
             cuisineFilter.innerHTML = ""
             cuisineSelect.innerHTML = ""
             cuisineCollection.forEach(cuisine => {   
-                console.log(cuisine.id);
+                // console.log(cuisine.id);
                 let cuisineInput = 
                 `
                     <option value="${cuisine.id}">${cuisine.name}</option>
@@ -51,6 +51,7 @@ function getRecipes() {
         getFetch()
         .then(recipe => {
             recipe.data.forEach(recipeData => {
+                // debugger;
                 const newRecipe = new Recipe(recipeData, recipeData.attributes)
                 recipeCollection.push(newRecipe)
                 recipeContainer.innerHTML += newRecipe.renderRecipes();
