@@ -18,39 +18,43 @@
                         <textarea id="recipe-description" type="text" name="description" placeholder="Enter description"></textarea></br>
                         <input id="recipe-image-url" type="text" name="image-url" placeholder="Enter image-url"></br>
                         
-                    
+                        <div class="select-container">
                         <label for="select-cuisine">Select a cuisine!</label>
                         <select id="cuisine-dropdown" name="select-cuisine">
                             <option value="1">Italian</option>
                             <option value="2">Mexican</option>
                             <option value="3">Thai</option>
                         </select></br>
+                        </div>
 
                         <input id="submit" type="submit" name="submit" value="Submit"></br>            
                     </form>
                     </br>
                     </br>
-
-                    <!-- <label for="filter-cuisine">Filter by cuisine!</label>
+                
+                <div class="filter-container">
+                    <label for="filter-cuisine">Filter by cuisine!</label>
                     <select id="filter-dropdown" name="filter-cuisine">
                         <option value="44">Italian</option>
                         <option value="45">Mexican</option>
                         <option value="46">Thai</option>
-                    </select></br> -->
+                    </select></br>
+                </div>
                 </div>
 
                 
                 <div class="recipe-container"></div>
                 </div>
 
-                <h3>Bookmarked Recipes</h3>
+                <!-- <h3>Bookmarked Recipes</h3>
                 <div class="bookmark-container" ></div>
                     <ul id="bookmarked-list">
 
                     </ul>
-                </div>
+                </div> -->
         </div>
     </section>
+    <script type="text/javascript" src="cuisine.js"></script>
     <script type="text/javascript" src="recipe.js"></script>
     <script type="text/javascript" src="index.js"></script>
 </body>

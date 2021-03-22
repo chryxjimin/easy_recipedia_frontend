@@ -1,9 +1,12 @@
 const apiUrl = "http://localhost:3000/api/v1/recipes";
-const cuisineSelect = document.querySelector("#filter-dropdown")
-const recipeContainer = document.querySelector(".recipe-container")
+const cuisineFilter = document.querySelector("#filter-dropdown")
+const cuisineSelect = document.querySelector("#cuisine-dropdown")
 const bookmarkContainer = document.querySelector(".bookmark-container")
+const recipeContainer = document.querySelector(".recipe-container")
 const recipeCollection = []
-const recipeLink = document.getElementsByTagName("A")
+const cuisineContainer = document.querySelector(".filter-container")
+// const recipeLink = document.getElementsByTagName("A")
+const formError = []
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
@@ -17,45 +20,56 @@ document.addEventListener('DOMContentLoaded', () => {
     // recipeLink.addEventListener("click", getRecipeBookmark());
 })
 
+
 function populateDropdown() {
+    let cuisineCollection = []
     fetch("http://localhost:3000/api/v1/cuisines")
     .then(res => res.json())
     .then(cuisines => {
-        console.log(cuisines.data[0].id)
-        // create class method to render the select dropdown form
-        //use forEach method over value of array of cuisines
-        //add cuisine.js?? and move renderCuisineDropdown() to the file
-        //create a div class for the select form
         
         cuisines.data.forEach(cuisine => {
-            console.log(cuisine.id)
+            let newCuisine = new Cuisine(cuisine, cuisine.attributes);
+            cuisineCollection.push(newCuisine)
+            cuisineFilter.innerHTML = ""
+            cuisineSelect.innerHTML = ""
+            cuisineCollection.forEach(cuisine => {   
+                // console.log(cuisine.id);
+                let cuisineInput = 
+                `
+                    <option value="${cuisine.id}">${cuisine.name}</option>
+                `
+                cuisineFilter.innerHTML += cuisineInput
+                cuisineSelect.innerHTML += cuisineInput
+            })
+            
         })
-    })
+    })   
 }
+
 
 function getRecipes() {
         getFetch()
         .then(recipe => {
             recipe.data.forEach(recipeData => {
+                // debugger;
                 const newRecipe = new Recipe(recipeData, recipeData.attributes)
                 recipeCollection.push(newRecipe)
                 recipeContainer.innerHTML += newRecipe.renderRecipes();
             
             })
-            document.querySelectorAll(".bookmark-button")
-            .forEach((button) => button.addEventListener("click", displayBookmarkedRecipes));
+            // document.querySelectorAll(".bookmark-button")
+            // .forEach((button) => button.addEventListener("click", displayBookmarkedRecipes));
 
             document.querySelectorAll(".delete-button")
             .forEach((button) => button.addEventListener("click", deleteRecipe));
         })
         .catch(error => {
-            alert("Error. Failed to fetch");
+            alert("Error. Failed to fetch recipes");
         })
         
 }
 
 function deleteRecipe(e) {
-    // console.log(+e.target.dataset)
     const {id} = e.target.dataset
     fetch(`http://localhost:3000/api/v1/recipes/${parseInt(id)}`, {
         method: "DELETE",   
@@ -90,17 +104,14 @@ function deleteRecipe(e) {
 
 
 function cuisineSelectDropdown() {
-    cuisineSelect.addEventListener("change", function(e) {
+    cuisineFilter.addEventListener("change", function(e) {
         getFetch()
         .then(recipe => {
 
             let filteredArray = []
             let recipeArray = recipe.data
-            // let cuisineId = recipe.data[0].attributes.cuisine_id
            
             filteredArray = recipeArray.filter(recipe => {
-                console.log(recipe)
-                console.log(e.target.value)
                 return recipe.attributes.cuisine_id === +e.target.value
             })
         
@@ -128,6 +139,8 @@ function createFormHandler(e) {
     const imageUrlInput = document.querySelector("#recipe-image-url").value
     const cuisineInput = parseInt(document.querySelector("#cuisine-dropdown").value)
     getPostFetch(titleInput, descriptionInput, imageUrlInput, cuisineInput)
+    //cuisineInput = integer
+    // debugger;
     e.target.reset();
 }
 
@@ -135,6 +148,8 @@ function createFormHandler(e) {
 
 function getPostFetch(title, description, image_url, cuisine_id) {
     const recipeBody = {title, description, image_url, cuisine_id}
+    // debugger;
+    // cuisine_id=integer
     fetch("http://localhost:3000/api/v1/recipes", {
         method: "POST",
         headers: {
@@ -145,12 +160,23 @@ function getPostFetch(title, description, image_url, cuisine_id) {
     })
     .then(resp => resp.json())
     .then(recipe => {
+        if (recipe.messages) {
+            renderErrors(recipe.messages)
+        }
+        else {
             const newRecipe = new Recipe(recipe.data, recipe.data.attributes)
             recipeCollection.push(newRecipe)
             recipeContainer.innerHTML += newRecipe.renderRecipes();
-        })
+        }
+    })
     .catch(error => {
             alert("Error");
     })
    
+}
+
+const renderErrors = function(errors) {
+    errors.forEach(error => {
+        formError.innerHTML += `<li>${error}</li>`
+    })
 }
