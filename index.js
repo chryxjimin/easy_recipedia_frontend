@@ -1,5 +1,6 @@
 const apiUrl = "http://localhost:3000/api/v1/recipes";
-const cuisineSelect = document.querySelector("#filter-dropdown")
+const cuisineFilter = document.querySelector("#filter-dropdown")
+const cuisineSelect = document.querySelector("#cuisine-dropdown")
 const bookmarkContainer = document.querySelector(".bookmark-container")
 const recipeContainer = document.querySelector(".recipe-container")
 const recipeCollection = []
@@ -31,6 +32,7 @@ function populateDropdown() {
             let newCuisine = new Cuisine(cuisine, cuisine.attributes);
             // debugger;
             cuisineCollection.push(newCuisine)
+            cuisineFilter.innerHTML = ""
             cuisineSelect.innerHTML = ""
             cuisineCollection.forEach(cuisine => {   
                 // console.log(cuisine.id);
@@ -38,6 +40,7 @@ function populateDropdown() {
                 `
                     <option value="${cuisine.id}">${cuisine.name}</option>
                 `
+                cuisineFilter.innerHTML += cuisineInput
                 cuisineSelect.innerHTML += cuisineInput
             })
             
@@ -103,7 +106,7 @@ function deleteRecipe(e) {
 
 
 function cuisineSelectDropdown() {
-    cuisineSelect.addEventListener("change", function(e) {
+    cuisineFilter.addEventListener("change", function(e) {
         getFetch()
         .then(recipe => {
 
