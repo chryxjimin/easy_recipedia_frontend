@@ -167,6 +167,8 @@ function getPostFetch(title, description, image_url, cuisine_id) {
             const newRecipe = new Recipe(recipe.data, recipe.data.attributes)
             recipeCollection.push(newRecipe)
             recipeContainer.innerHTML += newRecipe.renderRecipes();
+            document.querySelectorAll(`[data-id='${newRecipe.id}']`)[1].addEventListener("click", deleteRecipe)
+            //grab the new button that is added to the DOM, and addEventListenter
         }
     })
     .catch(error => {
