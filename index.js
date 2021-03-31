@@ -5,7 +5,6 @@ const bookmarkContainer = document.querySelector(".bookmark-container")
 const recipeContainer = document.querySelector(".recipe-container")
 const recipeCollection = []
 const cuisineContainer = document.querySelector(".filter-container")
-// const recipeLink = document.getElementsByTagName("A")
 const formError = []
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,9 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     populateDropdown();
     cuisineSelectDropdown();
     cuisineSelect.addEventListener("change", cuisineSelectDropdown());
-    // displayBookmarkedRecipes();
-    // getRecipeBookmarkDetails();
-    // recipeLink.addEventListener("click", getRecipeBookmark());
 })
 
 
@@ -33,7 +29,6 @@ function populateDropdown() {
             cuisineFilter.innerHTML = ""
             cuisineSelect.innerHTML = ""
             cuisineCollection.forEach(cuisine => {   
-                // console.log(cuisine.id);
                 let cuisineInput = 
                 `
                     <option value="${cuisine.id}">${cuisine.name}</option>
@@ -47,19 +42,16 @@ function populateDropdown() {
 }
 
 
+
 function getRecipes() {
         getFetch()
         .then(recipe => {
             recipe.data.forEach(recipeData => {
-                // debugger;
                 const newRecipe = new Recipe(recipeData, recipeData.attributes)
                 recipeCollection.push(newRecipe)
                 recipeContainer.innerHTML += newRecipe.renderRecipes();
             
             })
-            // document.querySelectorAll(".bookmark-button")
-            // .forEach((button) => button.addEventListener("click", displayBookmarkedRecipes));
-
             document.querySelectorAll(".delete-button")
             .forEach((button) => button.addEventListener("click", deleteRecipe));
         })
@@ -81,35 +73,17 @@ function deleteRecipe(e) {
 }
 
 
-// function displayBookmarkedRecipes(e) {
-    
-//     const {id} = e.target.dataset
-//     console.log(e.target.dataset)
-//     // debugger;
-//     fetch(`http://localhost:3000/api/v1/recipes/${parseInt(id)}`)
-//     .then(res => res.json())
-//     .then(recipe => {
-//         const newRecipe = new Recipe(recipe, recipe.data.attributes)
-//         bookmarkContainer.innerHTML += newRecipe.renderBookmarkedRecipes();
-        
-//         })
-// }
 
-
-// function getRecipeBookmarkDetails() {
-//     recipeLink.addEventListener("click", function(e) {
-//         console.log(e)
-//     })
-// }
 
 
 function cuisineSelectDropdown() {
-    cuisineFilter.addEventListener("change", function(e) {
+    cuisineFilter.addEventListener("change", e => {
+        console.log(this)
         getFetch()
         .then(recipe => {
 
             let filteredArray = []
-            let recipeArray = recipe.data
+            const recipeArray = recipe.data
            
             filteredArray = recipeArray.filter(recipe => {
                 return recipe.attributes.cuisine_id === +e.target.value
@@ -139,8 +113,6 @@ function createFormHandler(e) {
     const imageUrlInput = document.querySelector("#recipe-image-url").value
     const cuisineInput = parseInt(document.querySelector("#cuisine-dropdown").value)
     getPostFetch(titleInput, descriptionInput, imageUrlInput, cuisineInput)
-    //cuisineInput = integer
-    // debugger;
     e.target.reset();
 }
 
@@ -148,8 +120,6 @@ function createFormHandler(e) {
 
 function getPostFetch(title, description, image_url, cuisine_id) {
     const recipeBody = {title, description, image_url, cuisine_id}
-    // debugger;
-    // cuisine_id=integer
     fetch("http://localhost:3000/api/v1/recipes", {
         method: "POST",
         headers: {
@@ -168,7 +138,6 @@ function getPostFetch(title, description, image_url, cuisine_id) {
             recipeCollection.push(newRecipe)
             recipeContainer.innerHTML += newRecipe.renderRecipes();
             document.querySelectorAll(`[data-id='${newRecipe.id}']`)[1].addEventListener("click", deleteRecipe)
-            //grab the new button that is added to the DOM, and addEventListenter
         }
     })
     .catch(error => {
