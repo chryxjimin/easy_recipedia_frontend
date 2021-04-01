@@ -12,6 +12,10 @@
         <div class="container">
             <h1 class="app">EASY RECEPEDIA</h1>
                 <div class="input">
+                        <h3>Type in a recipe and press enter</h3>
+                        <input type="search" id="search-input" onsearch="searchRecipe()" placeholder="search">
+                   
+                    
                     <form id="create-recipe-form">
                         <h3>Create a Recipe!</h3>
                         <input id="recipe-title" type="text" name="title" placeholder="Enter title"></br>
@@ -46,12 +50,7 @@
                 <div class="recipe-container"></div>
                 </div>
 
-                <!-- <h3>Bookmarked Recipes</h3>
-                <div class="bookmark-container" ></div>
-                    <ul id="bookmarked-list">
-
-                    </ul>
-                </div> -->
+               
         </div>
     </section>
     <script type="text/javascript" src="cuisine.js"></script>

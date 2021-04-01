@@ -3,9 +3,10 @@ const cuisineFilter = document.querySelector("#filter-dropdown")
 const cuisineSelect = document.querySelector("#cuisine-dropdown")
 const bookmarkContainer = document.querySelector(".bookmark-container")
 const recipeContainer = document.querySelector(".recipe-container")
-const recipeCollection = []
+let recipeCollection = []
 const cuisineContainer = document.querySelector(".filter-container")
 const formError = []
+const searchBar = document.querySelector("#search-input")
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     populateDropdown();
     cuisineSelectDropdown();
     cuisineSelect.addEventListener("change", cuisineSelectDropdown());
+    searchBar.addEventListener("search", searchRecipe);
 })
 
 
@@ -40,6 +42,22 @@ function populateDropdown() {
         })
     })   
 }
+
+
+
+function searchRecipe(e) {
+    // console.log(e)
+    let queryInput = e.target.value
+    if (queryInput != "") {
+        recipeCollection.forEach(recipe => {
+                searchedRecipe = []
+                searchedRecipe = recipeCollection.find(recipe => recipe.title === queryInput)
+                recipeContainer.innerHTML = ""
+                recipeContainer.innerHTML += searchedRecipe.renderRecipes()
+        })
+    }
+}
+
 
 
 
