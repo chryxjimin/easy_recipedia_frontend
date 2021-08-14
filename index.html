@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,36 +9,59 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
 <body>
-        <div id="recipe-form-container">
-            <form id="create-recipe-form">
-                <h3>Create a Recipe!</h3>
-                <input id="recipe-title" type="text" name="title" placeholder="Enter title"></br>
-                <textarea id="recipe-description" type="text" name="description" placeholder="Enter description"></textarea></br>
-                <input id="recipe-image-url" type="text" name="image-url" placeholder="Enter image-url"></br>
+    <section>
+        <div class="container">
+            <h1 class="app">EASY RECEPEDIA</h1>
+                <div class="input">
+                        <h3>Type in a recipe and press enter</h3>
+                        <input type="search" id="search-input" onsearch="searchRecipe()" placeholder="search">
+                   
+                    
+                    <form id="create-recipe-form">
+                        <h3>Create a Recipe!</h3>
+                        <input id="recipe-title" type="text" name="title" placeholder="Enter title"></br>
+                        <textarea id="recipe-description" type="text" name="description" placeholder="Enter description"></textarea></br>
+                        <input id="recipe-image-url" type="text" name="image-url" placeholder="Enter image-url"></br>
+                        
+                        <div class="select-container">
+                        <label for="select-cuisine">Select a cuisine!</label>
+                        <select id="cuisine-dropdown" name="select-cuisine">
+                            <option value="1">Italian</option>
+                            <option value="2">Mexican</option>
+                            <option value="3">Thai</option>
+                        </select></br>
+                        </div>
+
+                        <input id="submit" type="submit" name="submit" value="Submit"></br>            
+                    </form>
+                    </br>
+                    </br>
                 
-            
-                <label for="select-cuisine">Select a cuisine!</label>
-                <select id="cuisine-dropdown" name="select-cuisine">
-                    <option value="1">Italian</option>
-                    <option value="2">Mexican</option>
-                    <option value="3">Thai</option>
-                </select></br>
+                <div class="filter-container">
+                    <label for="filter-cuisine">Filter by cuisine!</label>
+                    <select id="filter-dropdown" name="filter-cuisine">
+                        <option value="44">Italian</option>
+                        <option value="45">Mexican</option>
+                        <option value="46">Thai</option>
+                    </select></br>
+                </div>
+                </div>
 
-                <input id="submit" type="submit" name="submit" value="Submit"></br>            
-            
-            </form>
+                
+                <div class="recipe-container"></div>
+                </div>
+
+               
         </div>
-
-            
-           
-   
-
-        <div id="recipe-container"></div>
-        </div>
-
+    </section>
+    <script type="text/javascript" src="cuisine.js"></script>
     <script type="text/javascript" src="recipe.js"></script>
     <script type="text/javascript" src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<<<<<<< HEAD
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+=======
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+>>>>>>> 1ca652af93680e5118d45ca194482c096ccbac0d
 </body>
 </html>
