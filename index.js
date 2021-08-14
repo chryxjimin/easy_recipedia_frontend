@@ -46,7 +46,6 @@ function populateDropdown() {
 
 
 function searchRecipe(e) {
-    // console.log(e)
     let queryInput = e.target.value
     if (queryInput != "") {
         recipeCollection.forEach(recipe => {
