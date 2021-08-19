@@ -47,15 +47,25 @@ function populateDropdown() {
 
 function searchRecipe(e) {
     let queryInput = e.target.value
+    console.log(queryInput)
     if (queryInput != "") {
         recipeCollection.forEach(recipe => {
+            // console.log(recipe.title.includes(queryInput))
+            // console.log(recipe)
+            // console.log(recipe.title)
+            // console.log(recipe.title.toLowerCase())
+            if (recipe.title.toLowerCase().includes(queryInput.toLowerCase())) {
                 searchedRecipe = []
-                searchedRecipe = recipeCollection.find(recipe => recipe.title === queryInput)
+                // console.log(recipe, "RECIPE")
+                searchedRecipe = recipeCollection.find(recipe => recipe.title)
+                {console.log(searchedRecipe)}
                 recipeContainer.innerHTML = ""
                 recipeContainer.innerHTML += searchedRecipe.renderRecipes()
+            }
         })
     }
 }
+
 
 
 
