@@ -9,10 +9,10 @@ class Recipe {
 
     renderRecipes() {
         return `
-        <div class="flex-container" data-id=${this.id}>
+        <div class="card" styple="width: 18rem;" data-id=${this.id}>
             <h1 id="recipe-title">${this.title}</h1>
             <h3 id="recipe-description">${this.description}</h3>
-            <img id="recipe-image" src=${this.image_url} height="200" width="250"></img></br>
+            <img class="card-img-top" src=${this.image_url} height="300" width="18rem"></img></br>
             <button data-id=${this.id} type="button" class="delete-button">Delete</button>
         </div>   
         `
