@@ -9,11 +9,13 @@ class Recipe {
 
     renderRecipes() {
         return `
-        <div class="card" styple="width: 18rem;" data-id=${this.id}>
-            <h1 id="recipe-title">${this.title}</h1>
-            <h3 id="recipe-description">${this.description}</h3>
-            <img class="card-img-top" src=${this.image_url} height="300" width="18rem"></img></br>
-            <button data-id=${this.id} type="button" class="delete-button">Delete</button>
+        <div class="card" style="width: 27rem;" data-id=${this.id}>
+            <div class="card-body">
+                <h1 class="card-title" id="recipe-title">${this.title}</h1>
+                <h3 class="card-text" id="recipe-description">${this.description}</h3><br>
+                <img class="card-img-top" id="recipe-image" src=${this.image_url} height="200" width="250"></img><br></br>
+                <button data-id=${this.id} type="button" class="delete-button">Delete</button>
+            </div>
         </div>   
         `
     }
