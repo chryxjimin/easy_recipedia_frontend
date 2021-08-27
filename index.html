@@ -11,12 +11,23 @@
 <body>
     <section>
         <div class="container">
+            <section class="bg-light text-dark p-5 text-center">
+                <div class="container">
+                    <div class="d-sm-flex">
+                        <div>
+                            <h1>Welcome to EASY RECEPEDIA</h1>
+                        </div>
+                        <img class="img-fluid w-100" src="easyrecepedia.jpg" alt="picture of shrimp and polenta" />
+                    </div>
+                </div>
+            </section> 
+            
             <h1 class="app">EASY RECEPEDIA</h1>
                 <div class="input">
                         <h3>Type in a recipe and press enter</h3>
                         <input type="search" id="search-input" onsearch="searchRecipe()" placeholder="search">
                    
-                    
+                    <br></br>
                     <form id="create-recipe-form">
                         <h3>Create a Recipe!</h3>
                         <input id="recipe-title" type="text" name="title" placeholder="Enter title"></br>
@@ -51,7 +62,7 @@
                 <div class="recipe-container"></div>
                 </div>
 
-               
+              
         </div>
     </section>
     <script type="text/javascript" src="cuisine.js"></script>
