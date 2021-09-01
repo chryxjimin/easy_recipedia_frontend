@@ -44,21 +44,6 @@ function populateDropdown() {
 }
 
 
-
-// function searchRecipe(e) {
-//     console.log(e)
-//     let queryInput = e.target.value
-//     if (queryInput != "") {
-//         recipeCollection.forEach(recipe => {
-//                 searchedRecipe = []
-//                 searchedRecipe = recipeCollection.find(recipe => recipe.title === queryInput)
-//                 recipeContainer.innerHTML = ""
-//                 recipeContainer.innerHTML += searchedRecipe.renderRecipes()
-//         })
-//     }
-// }
-
-
 function searchRecipe(e) {
     let queryInput = e.target.value
     console.log(queryInput)
