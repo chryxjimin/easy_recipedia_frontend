@@ -14,7 +14,7 @@ class Recipe {
                 <h1 class="card-title" id="recipe-title"><p class="fs-3 fw-bold">${this.title}</p></h1>
                 <h3 class="card-text" id="recipe-description"><p class="fs-4 fw-light">${this.description}</p></h3><br>
                 <img class="card-img-top" id="recipe-image" src=${this.image_url} height="200" width="250"></img><br></br>
-                <button data-id=${this.id} class="delete-button btn btn-primary btn-lrg">Delete</button>
+                <button data-id=${this.id} class="delete-button btn btn-outline-secondary btn-lrg">Delete</button>
             </div>
         </div>   
         `
