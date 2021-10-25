@@ -47,14 +47,11 @@ function populateDropdown() {
 
 function searchRecipe(e) {
     let queryInput = searchBar.value
-    console.log(queryInput)
     if (queryInput != "") {
         recipeCollection.forEach(recipe => {
             if (recipe.title.toLowerCase().includes(queryInput.toLowerCase())) {
                 searchedRecipe = []
-                console.log(recipe, "RECIPE")
                 searchedRecipe = recipe
-                {console.log(searchedRecipe, "searchedRecipe")}
                 recipeContainer.innerHTML = ""
                 recipeContainer.innerHTML += searchedRecipe.renderRecipes()
             }
