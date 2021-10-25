@@ -7,6 +7,7 @@ let recipeCollection = []
 const cuisineContainer = document.querySelector(".filter-container")
 const formError = []
 const searchBar = document.querySelector("#search-input")
+const searchButton = document.querySelector("#search-button")
 
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes();
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     populateDropdown();
     cuisineSelectDropdown();
     cuisineSelect.addEventListener("change", cuisineSelectDropdown());
-    searchBar.addEventListener("search", searchRecipe);
+    searchButton.addEventListener("click", searchRecipe);
 })
 
 
@@ -45,7 +46,7 @@ function populateDropdown() {
 
 
 function searchRecipe(e) {
-    let queryInput = e.target.value
+    let queryInput = searchBar.value
     console.log(queryInput)
     if (queryInput != "") {
         recipeCollection.forEach(recipe => {
