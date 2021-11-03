@@ -3,7 +3,6 @@ class Recipe {
         this.id = recipeData.id;
         this.title = recipeAttributes.title;
         this.description = recipeAttributes.description;
-        console.log(this.description, "this.description")
         this.image_url = recipeAttributes.image_url;
         this.cuisine = recipeAttributes.cuisine;
     }
@@ -12,18 +11,19 @@ class Recipe {
         return `
        
         
-            
-                <div class="card" style="width: 27rem; text-align:center; display:inline-block;" data-id=${this.id}>
-                    <div class="card-block">
+        <div class="card-deck">
+        
+        
+                <div class="card"; style="width: 27rem, height: 35 rem; text-align:center; display:inline-block;" data-id=${this.id}>
+                    
                     <div class="card-body">
-                        <img class="card-img-top" id="recipe-image" src=${this.image_url} height="200" width="250"></img><br></br>
+                        <img class="card-img-top" id="recipe-image" src=${this.image_url} ></img><br></br>
                         <h1 class="card-title" id="recipe-title"><p class="fs-3 fw-bold">${this.title}</p></h1>
-                        <h3 class="card-text" id="recipe-description"><p class="fs-4 fw-light">${this.description}</p></h3><br>
                         <button data-id=${this.id} class="delete-button btn btn-outline-secondary btn-lrg">Delete</button>
                     </div>
                     </div>
                 </div>   
-            
+        </div>
        
       
         `
@@ -37,4 +37,6 @@ class Recipe {
     }
 }
 
+
+{/* <h3 class="card-text" id="recipe-description"><p class="fs-4 fw-light">${this.description}</p></h3><br></br> */}
 
